@@ -1,0 +1,72 @@
+Description: Remove SaxonCAPI.debug statements
+
+--- a/net/sf/saxon/jetonnet/JetPullProvider.java
++++ b/net/sf/saxon/jetonnet/JetPullProvider.java
+@@ -6,7 +6,6 @@ import net.sf.saxon.expr.parser.Explicit
+ import net.sf.saxon.expr.parser.Location;
+ import net.sf.saxon.lib.ParseOptions;
+ import net.sf.saxon.om.*;
+-import net.sf.saxon.option.cpp.SaxonCAPI;
+ import net.sf.saxon.pull.PullProvider;
+ import net.sf.saxon.pull.PullSource;
+ import net.sf.saxon.pull.UnparsedEntity;
+@@ -40,9 +39,6 @@ public class JetPullProvider implements
+ 
+ 
+     public JetPullProvider(Object parser, long parserPtr, String bURI) {
+-        if (SaxonCAPI.debug) {
+-            System.err.println("Java: Parser pointer long value="+parserPtr);
+-        }
+         this.parser = parser;
+         this.parserPtr = parserPtr;
+         this.parserPtrInt = (int)parserPtr;
+@@ -111,9 +107,6 @@ public class JetPullProvider implements
+     @Override
+     public int next() throws XPathException {
+ 
+-        if (SaxonCAPI.debug) {
+-            System.err.println("Java: next(), current = " + current + " empty: " + isEmptyElement);
+-        }
+         if (current == START_OF_INPUT) {
+             current = START_DOCUMENT;
+             return current;
+@@ -145,9 +138,6 @@ public class JetPullProvider implements
+ 
+             int intype = get_NodeType(parserPtr);
+             isEmptyElement = get_IsEmptyElement(parserPtr);
+-            if (SaxonCAPI.debug) {
+-                System.err.println("Java: Next event: " + intype + " at depth " + get_Depth(parserPtr) + " empty: " + isEmptyElement + "," + get_IsEmptyElement(parserPtr));
+-            }
+             if (get_EOF(parserPtr)) {
+                 current = END_DOCUMENT;
+                 return current;
+@@ -251,9 +241,6 @@ public class JetPullProvider implements
+                 String namespaceURI = result.substring(result.indexOf("{") + 1, closingBracket);
+                 String localName = result.substring(closingBracket + 1, valueIndex);
+                 String value = result.substring(valueIndex + 1);
+-                if (SaxonCAPI.debug) {
+-                    System.err.println("Java: getNodeName prefix= " + prefix + ", namespace=" + namespaceURI + ", localName=" + localName + " value=" + value);
+-                }
+                 NodeName nc = new FingerprintedQName(prefix, namespaceURI, localName);
+                 // .NET does not report the attribute type (even if it's an ID...)
+                 atts.addAttribute(nc, BuiltInAtomicType.UNTYPED_ATOMIC, value, ExplicitLocation.UNKNOWN_LOCATION, 0);
+@@ -289,9 +276,6 @@ public class JetPullProvider implements
+         String prefix = result.substring(0, openingBracket);
+         String namespaceURI = result.substring(result.indexOf("{") + 1, closingBracket);
+         String localName = result.substring(closingBracket + 1);
+-        if (SaxonCAPI.debug) {
+-            System.err.println("Java: getNodeName prefix= " + prefix + ", namespace=" + namespaceURI + ", localName=" + localName);
+-        }
+         return new FingerprintedQName(prefix, namespaceURI, localName);
+     }
+ 
+--- a/net/sf/saxon/jetonnet/JetStream.java
++++ b/net/sf/saxon/jetonnet/JetStream.java
+@@ -3,7 +3,6 @@ package net.sf.saxon.jetonnet;
+ import net.sf.saxon.Configuration;
+ import net.sf.saxon.lib.ParseOptions;
+ import net.sf.saxon.om.NodeInfo;
+-import net.sf.saxon.option.cpp.SaxonCAPI;
+ import net.sf.saxon.pull.PullSource;
+ import net.sf.saxon.s9api.Processor;
+ import net.sf.saxon.s9api.XdmNode;

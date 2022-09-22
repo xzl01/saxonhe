@@ -1,0 +1,181 @@
+Description: Add pom.xml for building and packaging
+
+--- /dev/null
++++ b/pom.xml
+@@ -0,0 +1,176 @@
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>net.sf.saxon</groupId>
++  <artifactId>Saxon-HE</artifactId>
++  <version>9.9.1.5</version>
++  <packaging>jar</packaging>
++  <name>Saxon-HE</name>
++  <description>The XSLT and XQuery Processor</description>
++  <url>http://www.saxonica.com/</url>
++  <organization>
++    <name>Saxonica</name>
++    <url>http://www.saxonica.com</url>
++  </organization>
++  <licenses>
++    <license>
++      <name>Mozilla Public License Version 2.0</name>
++      <url>http://www.mozilla.org/MPL/2.0/</url>
++      <distribution>repo</distribution>
++    </license>
++  </licenses>
++  <properties>
++    <configs.path>target/config</configs.path>
++    <edition.properties>target/edition</edition.properties>
++    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++  </properties>
++  <dependencies>
++    <dependency>
++      <groupId>org.jdom</groupId>
++      <artifactId>jdom</artifactId>
++      <version>1.1</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>xom</groupId>
++      <artifactId>xom</artifactId>
++      <version>1.2.5</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>org.dom4j</groupId>
++      <artifactId>dom4j</artifactId>
++      <version>1.6.1</version>
++    </dependency>
++    <dependency>
++      <groupId>xml-resolver</groupId>
++      <artifactId>xml-resolver</artifactId>
++      <version>1.2</version>
++    </dependency>
++    <dependency>
++      <groupId>com.intellij</groupId>
++      <artifactId>annotations</artifactId>
++      <version>12.0</version>
++    </dependency>
++    <dependency>
++      <groupId>com.ibm.icu</groupId>
++      <artifactId>icu4j</artifactId>
++      <version>57.1</version>
++    </dependency>
++  </dependencies>
++  <build>
++    <pluginManagement>
++      <plugins>
++        <plugin>
++          <groupId>org.apache.maven.plugins</groupId>
++          <artifactId>maven-compiler-plugin</artifactId>
++          <configuration>
++            <encoding>ISO-8859-1</encoding>
++            <source>1.8</source>
++            <target>1.8</target>
++          </configuration>
++        </plugin>
++      </plugins>
++    </pluginManagement>
++    <resources>
++	<resource>
++		<directory>${configs.path}</directory>
++		<targetPath>META-INF</targetPath>
++	</resource>
++	<resource>
++		<directory>${edition.properties}</directory>
++		<targetPath>.</targetPath>
++	</resource>
++	<resource>
++		<directory>net/sf/saxon/data</directory>
++		<targetPath>net/sf/saxon/data</targetPath>
++	</resource>
++    </resources>
++    <plugins>
++        <plugin>
++        <artifactId>maven-antrun-plugin</artifactId>
++        <version>1.6</version>
++        <executions>
++          <execution>
++            <id>generate-resources</id>
++            <phase>generate-resources</phase>
++            <configuration>
++              <target>
++                <mkdir dir="${configs.path}/services"/>
++                <echo file="${configs.path}/services/javax.xml.transform.TransformerFactory"
++                      message="net.sf.saxon.TransformerFactoryImpl"/>
++                <echo file="${configs.path}/services/javax.xml.xpath.XPathFactory"
++                      message="net.sf.saxon.xpath.XPathFactoryImpl"/>
++                <mkdir dir="${edition.properties}"/>
++                <echo file="${edition.properties}/edition.properties">config=net.sf.saxon.Configuration
++platform=net.sf.saxon.java.JavaPlatform
++		</echo>
++              </target>
++            </configuration>
++            <goals>
++              <goal>run</goal>
++            </goals>
++          </execution>
++          <execution>
++            <id>fix-sources</id>
++            <phase>generate-sources</phase>
++             <configuration>
++              <target>
++                <taskdef resource="com/igormaznitsa/jcp/ant/tasks.properties" classpath="/usr/share/java/jcp.jar"/>
++                <preprocess source="net" destination="src/main/java/net" verbose="false">
++                  <global name="EE" value="false"/>
++                  <global name="PE" value="false"/>
++                  <global name="DOTNET" value="false"/>
++                  <global name="OPT" value="false"/>
++                  <global name="SAXONC" value="false"/>
++                  <global name="BYTECODE" value="false"/>
++                </preprocess>
++
++                <replaceregexp match="import com\.saxonica(.*)" replace="" flags="g">
++                  <fileset dir="src/main/java/net"  includes="**/*.java" />
++                </replaceregexp>
++                <replaceregexp match="import net\.sf\.saxon\.dotnet(.*)" replace="" flags="g">
++                  <fileset dir="src/main/java/net"  includes="**/*.java" />
++                </replaceregexp>
++              </target>
++            </configuration>
++            <goals>
++              <goal>run</goal>
++            </goals>
++          </execution>
++        </executions>
++        <dependencies>
++          <dependency>
++            <groupId>commons-io</groupId>
++            <artifactId>commons-io</artifactId>
++            <version>2.5</version>
++          </dependency>
++        </dependencies>
++      </plugin>
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId>
++        <artifactId>maven-jar-plugin</artifactId>
++        <configuration>
++          <archive>
++            <manifest>
++            <addClasspath>true</addClasspath>
++            <classpathLayoutType>custom</classpathLayoutType>
++            <customClasspathLayout>/usr/share/java/$${artifact.artifactId}.$${artifact.extension}</customClasspathLayout>
++            <mainClass>net.sf.saxon.Transform</mainClass>
++            </manifest>
++          </archive>
++        </configuration>
++      </plugin>
++      <plugin>
++        <artifactId>maven-clean-plugin</artifactId>
++          <configuration>
++          <filesets>
++            <fileset>
++              <directory>src</directory>
++            </fileset>
++          </filesets>
++        </configuration>
++      </plugin>
++    </plugins>
++  </build>
++</project>

@@ -1,0 +1,3 @@
+
+s/jdom/org.jdom/ jdom jar s/1\..*/debian/ * *
+net.sf.saxon Saxon-HE jar s/.*/debian/ * *

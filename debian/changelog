@@ -1,0 +1,139 @@
+saxonhe (9.9.1.5+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 4.4.1 (no changes)
+
+ -- Eugene Zhukov <eugene@debian.org>  Mon, 09 Dec 2019 13:39:03 +0200
+
+saxonhe (9.9.1.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Trim trailing whitespace.
+  * Use secure URI in Homepage field.
+  * Use secure copyright file specification URI.
+  * Bump Standards-Version to 4.4.0 (no changes)
+
+ -- Eugene Zhukov <eugene@debian.org>  Tue, 23 Jul 2019 16:28:21 -0300
+
+saxonhe (9.9.0.2+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Eugene Zhukov <eugene@debian.org>  Tue, 20 Nov 2018 10:00:00 +0200
+
+saxonhe (9.9.0.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update Java source and target to 1.8
+  * Add patch to remove debugging
+  * Bump Standards-Version to 4.2.1.3
+  * Remove get-orig-source target from d/rules
+
+ -- Eugene Zhukov <eugene@debian.org>  Thu, 25 Oct 2018 21:52:08 +0300
+
+saxonhe (9.8.0.14+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 4.1.4
+  * Change Vcs URLs to point to salsa
+
+ -- Eugene Zhukov <eugene@debian.org>  Thu, 26 Jul 2018 11:05:10 +0300
+
+saxonhe (9.8.0.8+dfsg+1-2) unstable; urgency=medium
+
+  * Add resources to the correct path
+    (Closes: #892119, #892120, #892156)
+  * Remove unnecessary dh argument in d/rules
+  * Close no longer relevant wishlist bug (Closes: #808211)
+
+ -- Eugene Zhukov <eugene@debian.org>  Sun, 11 Mar 2018 11:06:02 +0200
+
+saxonhe (9.8.0.8+dfsg+1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Remove d/README.Debian, net/sf/saxon/xqj is gone
+
+ -- Eugene Zhukov <eugene@debian.org>  Fri, 16 Feb 2018 07:42:40 +0000
+
+saxonhe (9.8.0.2+dfsg+1-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream release 9.8.0.2
+  * Update SVN export site in debian/orig-tar.sh
+  * Update version in Debian-provided pom.xml
+  * Add build-dep on libintellij-annotations-java and libicu4j-java
+  * Bump Standards-Version to 4.1.3
+  * Use debhelper 11
+  * Address lintian error in debian/copyright for W3C license
+
+ -- tony mancill <tmancill@debian.org>  Sun, 11 Feb 2018 20:43:05 -0800
+
+saxonhe (9.7.0.10+dfsg+1-1) unstable; urgency=medium
+
+  * Include upstream resources (dfsg+1)
+  * Add w3c license to d/copyright
+
+ -- Eugene Zhukov <eugene@debian.org>  Mon, 19 Jun 2017 10:33:51 +0000
+
+saxonhe (9.7.0.10+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 3.9.8 (no changes)
+
+ -- Eugene Zhukov <eugene@debian.org>  Sat, 04 Feb 2017 20:14:25 +0200
+
+saxonhe (9.7.0.6+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Eugene Zhukov <eugene@debian.org>  Sat, 09 Jul 2016 11:45:54 +0200
+
+saxonhe (9.7.0.2+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Switch away from CDBS to debhelper
+  * Bump Standards-Version to 3.9.7 (no changes)
+
+ -- Eugene Zhukov <eugene@debian.org>  Mon, 15 Feb 2016 07:35:02 +0000
+
+saxonhe (9.7.0.1+dfsg-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Eugene Zhukov <eugene@debian.org>  Mon, 07 Dec 2015 15:31:33 +0200
+
+saxonhe (9.6.0.7+dfsg-1) experimental; urgency=low
+
+  * New upstream release.
+  * Bump Standards-Version to 3.9.6.
+
+ -- Eugene Zhukov <eugene@debian.org>  Mon, 28 Sep 2015 12:48:23 +0000
+
+saxonhe (9.5.1.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Added dependency on libcomment-preprocessor-java.
+  * d/compat changed to 9.
+  * d/copyright license chenged to MPL-2.0.
+  * Use +dfsg instead of .dfsg to remove Lintian warning.
+
+ -- Eugene Zhukov <jevgeni.zh@gmail.com>  Sun, 14 Sep 2014 11:42:27 +0000
+
+saxonhe (9.4.0.7.dfsg-2) unstable; urgency=low
+
+  [ Eugene Zhukov ]
+  * Remove some Java 5 needed property, invalid for Java 8.
+  * Bump Standards-Version to 3.9.5.
+
+  [ tony mancill ]
+  * debian/control
+    - Use canonical Vcs URLs.
+    - Use DH9.
+
+ -- Eugene Zhukov <jevgeni.zh@gmail.com>  Tue, 29 Apr 2014 12:09:47 +0000
+
+saxonhe (9.4.0.7.dfsg-1) unstable; urgency=low
+
+  * Initial release. Closes: #708214
+
+ -- Eugene Zhukov <jevgeni.zh@gmail.com>  Fri, 17 May 2013 11:28:26 +0000

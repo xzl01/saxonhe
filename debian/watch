@@ -1,0 +1,4 @@
+version=3
+opts=dversionmangle=s/\+dfsg// \
+https://dev.saxonica.com/repos/archive/opensource/tags/ (\d.*)/ \
+    debian debian/orig-tar.sh
